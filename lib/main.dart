@@ -1,3 +1,4 @@
+import 'package:evlow_foodies/Authentification/auth_screen.dart';
 import 'package:evlow_foodies/firebase_options.dart';
 import 'package:evlow_foodies/page/home_page.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _HomeContentState extends State<HomeContent> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
+    const HomePage(),
     SaltPage(),
     SweetPage(),
     PtitsGonesPage(),
@@ -81,7 +82,7 @@ class _HomeContentState extends State<HomeContent> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ProfilScreen(),
+                        builder: (context) => const AuthScreen(),
                       ),
                     );
                   },
