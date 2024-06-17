@@ -9,7 +9,6 @@ import 'package:evlow_foodies/page/ptits_gones_page.dart';
 import 'package:evlow_foodies/page/salt_page.dart';
 import 'package:evlow_foodies/page/specific_page.dart';
 import 'package:evlow_foodies/page/sweet_page.dart';
-import 'package:evlow_foodies/screen/profil_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +35,7 @@ class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeContentState createState() => _HomeContentState();
 }
 
@@ -44,10 +44,10 @@ class _HomeContentState extends State<HomeContent> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    SaltPage(),
-    SweetPage(),
-    PtitsGonesPage(),
-    SpecificPage(),
+    const SaltPage(),
+    const SweetPage(),
+    const PtitsGonesPage(),
+    const SpecificPage(),
   ];
 
   void _onItemTapped(int index) {
