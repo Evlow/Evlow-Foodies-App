@@ -35,6 +35,7 @@ class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeContentState createState() => _HomeContentState();
 }
 
@@ -42,11 +43,11 @@ class _HomeContentState extends State<HomeContent> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    SaltPage(),
-    SweetPage(),
-    PtitsGonesPage(),
-    SpecificPage(),
+    const HomePage(),
+    const SaltPage(),
+    const SweetPage(),
+    const PtitsGonesPage(),
+    const SpecificPage(),
   ];
 
   void _onItemTapped(int index) {
