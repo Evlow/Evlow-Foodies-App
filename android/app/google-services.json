@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "773382484480",
+    "project_id": "evlow-foodies-bc520",
+    "storage_bucket": "evlow-foodies-bc520.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773382484480:android:29958f74e2dfa9a3569ee5",
+        "android_client_info": {
+          "package_name": "com.example.evlow_foodies"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSZ82deliZewxWtl2QMKysCxsbdXuSDoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
