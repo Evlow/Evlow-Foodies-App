@@ -24,16 +24,13 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signIn() async {
-    // Ajoutez votre logique de connexion ici
     setState(() {
-      loading = true; // Activez l'écran de chargement
+      _formKey.currentState!.reset();
+      loading = true;
     });
 
-    // Simulation d'une attente pour la démonstration
-    await Future.delayed(Duration(seconds: 2));
-
     setState(() {
-      loading = false; // Désactivez l'écran de chargement
+      loading = false;
     });
   }
 
@@ -81,7 +78,8 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(  "Envie de partager vos recettes ?\nDe retrouver vos recettes coup de coeur ?"),
+                  const Text(
+                      "Envie de partager vos recettes ?\nDe retrouver vos recettes coup de coeur ?"),
                   const SizedBox(height: 20.0),
                   Form(
                     key: _formKey,
@@ -90,6 +88,15 @@ class _AuthScreenState extends State<AuthScreen> {
                         TextFormField(
                           controller: emailController,
                           decoration: const InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: EdgeInsets.all(10),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: Color.fromARGB(255, 235, 87, 87),
+                            )),
                             labelText: 'Email',
                           ),
                           validator: (value) =>
@@ -100,20 +107,43 @@ class _AuthScreenState extends State<AuthScreen> {
                           controller: passwordController,
                           obscureText: true,
                           decoration: const InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: EdgeInsets.all(10),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.red)),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.red)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: Color.fromARGB(255, 235, 87, 87),
+                            )),
                             labelText: 'Mot de passe',
                           ),
-                          validator: (value) =>
-                              value!.length < 6 ? "Entrer un mot de passe" : null,
+                          validator: (value) => value!.length < 6
+                              ? "Entrer un mot de passe d'au moins 6 caractères"
+                              : null,
                         ),
                         const SizedBox(height: 20.0),
                         ElevatedButton(
-                          onPressed: signIn,
-                          child: const Text('Sign In'),
-                        ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                signIn();
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 55, 121, 66),
+                              foregroundColor: Colors.white, // Couleur du texte
+                            ),
+                            child: const Text('Je me connecte')),
                         const SizedBox(height: 12.0),
                         Text(
                           error,
-                          style: const TextStyle(color: Colors.red, fontSize: 14.0),
+                          style: const TextStyle(
+                              color: Colors.red, fontSize: 14.0),
                         ),
                       ],
                     ),
