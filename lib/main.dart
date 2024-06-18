@@ -1,4 +1,4 @@
-import 'package:evlow_foodies/Authentification/auth_screen.dart';
+import 'package:evlow_foodies/authentification/register_screen.dart';
 import 'package:evlow_foodies/firebase_options.dart';
 import 'package:evlow_foodies/page/home_page.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +23,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  const MaterialApp(
       title: 'Evlow',
       debugShowCheckedModeBanner: false,
       home: HomeContent(),
+      // theme:ThemeData(
+      //           fontFamily: 'AdventPro-Light',
+      // ),
     );
   }
 }
@@ -63,7 +66,7 @@ class _HomeContentState extends State<HomeContent> {
         backgroundColor: Colors.white,
         toolbarHeight: 80.0,
         title: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 10),
           child: Stack(
             children: [
               Center(
@@ -82,14 +85,14 @@ class _HomeContentState extends State<HomeContent> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AuthScreen(),
+                        builder: (context) => const RegisterScreen(),
                       ),
                     );
                   },
                   child: Center(
                     child: SvgPicture.asset(
                       'images/profil.svg',
-                      height: 40.0,
+                      height: 45.0,
                     ),
                   ),
                 ),
