@@ -1,3 +1,5 @@
+import 'package:evlow_foodies/authentification/register_screen.dart';
+import 'package:evlow_foodies/colors/colors.dart';
 import 'package:evlow_foodies/firebase_options.dart';
 import 'package:evlow_foodies/page/home_page.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,6 @@ import 'package:evlow_foodies/page/ptits_gones_page.dart';
 import 'package:evlow_foodies/page/salt_page.dart';
 import 'package:evlow_foodies/page/specific_page.dart';
 import 'package:evlow_foodies/page/sweet_page.dart';
-import 'package:evlow_foodies/screen/profil_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +24,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return   MaterialApp(
       title: 'Evlow',
       debugShowCheckedModeBanner: false,
-      home: HomeContent(),
+      home: const HomeContent(),
+      theme:ThemeData(
+                fontFamily: 'AdventPro'
+      )
     );
   }
 }
@@ -59,11 +63,22 @@ class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  //     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+  //     floatingActionButton: FloatingActionButton(
+  //       onPressed:(){},
+  //         child: const Icon(Icons.add),
+
+  // foregroundColor: greenColor,
+  // elevation: 0,
+  // backgroundColor: Colors.white,
+
+
+  //     ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         toolbarHeight: 80.0,
         title: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 10),
           child: Stack(
             children: [
               Center(
@@ -82,14 +97,14 @@ class _HomeContentState extends State<HomeContent> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ProfilScreen(),
+                        builder: (context) => const RegisterScreen(),
                       ),
                     );
                   },
                   child: Center(
                     child: SvgPicture.asset(
                       'images/profil.svg',
-                      height: 40.0,
+                      height: 45.0,
                     ),
                   ),
                 ),
@@ -142,10 +157,10 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 235, 87, 87),
+        selectedItemColor: orangeColor,
         onTap: _onItemTapped,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
       ),
     );
   }
