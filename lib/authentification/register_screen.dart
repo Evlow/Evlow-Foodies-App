@@ -1,13 +1,11 @@
 import 'package:evlow_foodies/Authentification/auth_service.dart';
 import 'package:evlow_foodies/authentification/sign_in_screen.dart';
 import 'package:evlow_foodies/colors/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:evlow_foodies/shared/loading.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key})
-      : super(key: key); // Constructeur de la classe RegisterScreen
+  const RegisterScreen({super.key}); // Constructeur de la classe RegisterScreen
 
   @override
   State<RegisterScreen> createState() =>
@@ -63,6 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (result != null) {
         // Navigation vers l'écran suivant (SignInScreen dans cet exemple)
         Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => const SignInScreen()),
         );

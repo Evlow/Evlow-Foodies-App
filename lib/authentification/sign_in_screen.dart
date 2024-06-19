@@ -1,15 +1,14 @@
 import 'package:evlow_foodies/Authentification/auth_service.dart';
 import 'package:evlow_foodies/authentification/register_screen.dart';
 import 'package:evlow_foodies/colors/colors.dart';
-import 'package:evlow_foodies/main.dart';
+import 'package:evlow_foodies/page/home_page_profil_content.dart';
 import 'package:flutter/material.dart';
 import 'package:evlow_foodies/shared/loading.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
   @override
-  State<SignInScreen> createState() =>
-      _SignInScreenState(); 
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
@@ -50,7 +49,8 @@ class _SignInScreenState extends State<SignInScreen> {
         Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => const HomeContent()),
+          MaterialPageRoute(
+              builder: (context) => const HomePageProfilContent()),
         );
       } else {
         // En cas d'échec de la connexion
@@ -186,8 +186,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                               greenColor,
+                            backgroundColor: greenColor,
                             foregroundColor: Colors.white,
                             textStyle: const TextStyle(
                               fontSize: 16,
@@ -215,7 +214,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const RegisterScreen()),
+                                          const HomePageProfilContent()),
                                 );
                               },
                               child: const Text(

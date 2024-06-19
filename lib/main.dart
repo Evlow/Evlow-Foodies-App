@@ -63,6 +63,17 @@ class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  //     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+  //     floatingActionButton: FloatingActionButton(
+  //       onPressed:(){},
+  //         child: const Icon(Icons.add),
+
+  // foregroundColor: greenColor,
+  // elevation: 0,
+  // backgroundColor: Colors.white,
+
+
+  //     ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         toolbarHeight: 80.0,
