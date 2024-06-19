@@ -1,5 +1,4 @@
 import 'package:evlow_foodies/Authentification/auth_service.dart';
-import 'package:evlow_foodies/authentification/register_screen.dart';
 import 'package:evlow_foodies/colors/colors.dart';
 import 'package:evlow_foodies/page/home_page_profil_content.dart';
 import 'package:flutter/material.dart';
