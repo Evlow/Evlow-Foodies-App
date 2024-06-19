@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,12 +14,30 @@ class _HomePageState extends State<HomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
+          padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
+          child: Row(
+            children: [
+              Text("Qu’est-ce qu’on mange ?",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ],
           ),
         ),
         Padding(
           padding: EdgeInsets.all(5.0),
           child: Text(
+              "Avec Evlow Foodies, vous trouverez des recettes, pour tous les goûts et faciles à réaliser !",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+              )),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
+          child: Text("Découvrez les dernières idées de recettes :",
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        ),
       ],
     );
   }
