@@ -1,5 +1,10 @@
 import 'package:evlow_foodies/colors/colors.dart';
+import 'package:evlow_foodies/page/account_page.dart';
+import 'package:evlow_foodies/page/add_recipes_page.dart';
+import 'package:evlow_foodies/page/favoris_page.dart';
+import 'package:evlow_foodies/page/recipes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomePageProfilContent extends StatefulWidget {
   const HomePageProfilContent({super.key});
@@ -12,11 +17,11 @@ class _HomePageProfilContentState extends State<HomePageProfilContent> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    // const HomePageProfilContent(),
-    // const RecipePage(),
-    // const AccountPage(),
-    // const AddRecipes(),
-    // const FavorisPage(),
+    const HomePageProfilContent(),
+    const RecipesPage(),
+    const AccountPage(),
+    const AddRecipes(),
+    const FavorisPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -81,21 +86,21 @@ class _HomePageProfilContentState extends State<HomePageProfilContent> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items:  <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Accueil',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fastfood),
-            label: 'plus',
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.book_online),
+            label: 'Recettes',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_outlined),
+            icon: Icon(MdiIcons.account),
             label: 'Compte',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.heart_broken_sharp),
+           BottomNavigationBarItem(
+            icon: Icon(MdiIcons.heartOutline),
             label: 'Favoris',
           ),
         ],
