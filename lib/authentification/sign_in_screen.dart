@@ -1,5 +1,6 @@
 import 'package:evlow_foodies/Authentification/auth_service.dart';
 import 'package:evlow_foodies/colors/colors.dart';
+import 'package:evlow_foodies/page/home_page_bo.dart';
 import 'package:evlow_foodies/page/home_page_profil_content.dart';
 import 'package:flutter/material.dart';
 import 'package:evlow_foodies/shared/loading.dart';
@@ -48,8 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
         Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(
-              builder: (context) => const HomePageProfilContent()),
+          MaterialPageRoute(builder: (context) => const HomePageBO()),
         );
       } else {
         // En cas d'échec de la connexion
@@ -212,8 +212,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const HomePageProfilContent()),
+                                      builder: (context) => const HomePageBO()),
                                 );
                               },
                               child: const Text(
