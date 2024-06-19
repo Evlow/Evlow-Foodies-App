@@ -22,7 +22,6 @@ class AuthService {
       // Convertit et retourne l'AppUser correspondant
       return _userFromFirebaseUser(user);
     } catch (exception) {
-      print(exception.toString());
       return null;
     }
   }
@@ -39,7 +38,6 @@ class AuthService {
       // Convertit et retourne l'AppUser correspondant
       return _userFromFirebaseUser(user);
     } catch (exception) {
-      print(exception.toString());
       return null;
     }
   }
@@ -50,8 +48,7 @@ class AuthService {
       return await _auth.signOut();
       // Déconnexion avec Firebase
     } catch (exception) {
-      print(exception.toString());
-      return null;
+      return;
     }
   }
 

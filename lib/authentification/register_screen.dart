@@ -1,5 +1,7 @@
 import 'package:evlow_foodies/Authentification/auth_service.dart';
 import 'package:evlow_foodies/authentification/sign_in_screen.dart';
+import 'package:evlow_foodies/colors/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:evlow_foodies/shared/loading.dart';
 
@@ -31,6 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     emailController.dispose(); // Libère les ressources du contrôleur d'email
     passwordController
         .dispose(); // Libère les ressources du contrôleur de mot de passe
+    confirmPasswordController.dispose();
     super.dispose(); // Appelle la méthode dispose de la classe mère
   }
 
@@ -53,19 +56,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return; // Arrêter l'exécution de la méthode
       }
 
-      // Appel à la méthode signInWithEmailAndPassword de l'instance _auth pour tenter la connexion
+      // Appel à la méthode registerWithEmailAndPassword de l'instance _auth pour tenter l'inscription
       dynamic result =
           await _auth.registerWithEmailAndPassword(email, password);
 
       if (result != null) {
-        // Navigation vers l'écran suivant (HomeScreen dans cet exemple)
+        // Navigation vers l'écran suivant (SignInScreen dans cet exemple)
         Navigator.pushReplacement(
-          // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => const SingInScreen()),
+          MaterialPageRoute(builder: (context) => const SignInScreen()),
         );
       } else {
-        // En cas d'échec de la connexion
+        // En cas d'échec de l'inscription
         setState(() {
           loading = false;
           error = "Erreur lors de l'inscription. Vérifiez vos identifiants.";
@@ -74,7 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       setState(() {
         loading = false;
-        error ="Une erreur est survenue lors de l'inscription";
+        error = "Une erreur est survenue lors de l'inscription.";
       });
     }
   }
@@ -84,6 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return loading
         ? const Loading()
         : Scaffold(
+            resizeToAvoidBottomInset: true,
             appBar: AppBar(
               backgroundColor: Colors.white,
               toolbarHeight: 80.0,
@@ -118,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            body: Container(
+            body: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 235, 87, 87),
+                        color: orangeColor
                       )),
                   const SizedBox(height: 20.0),
                   Form(
@@ -147,18 +150,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           controller:
                               emailController, // Utilise le contrôleur emailController pour gérer le champ
                           decoration: const InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(10),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color.fromARGB(255, 235, 87, 87),
-                            )),
-                            labelText:
-                                'Email', // Texte à afficher dans le champ
-                          ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding: EdgeInsets.all(10),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: orangeColor
+                              )),
+                              labelText:
+                                  'Email', // Texte à afficher dans le champ
+                              labelStyle: TextStyle(color: Colors.black)),
                           validator: (value) => value!.isEmpty
                               ? "Entrer un email"
                               : null, // Validation du champ email
@@ -167,34 +170,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TextFormField(
                           controller:
                               passwordController, // Utilise le contrôleur passwordController pour gérer le champ
-                          obscureText: false,
+                          obscureText: true,
                           decoration: const InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(10),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color.fromARGB(255, 235, 87, 87),
-                            )),
-                            labelText:
-                                'Mot de passe', // Texte à afficher dans le champ
-                          ),
-                          validator: (value) => value!.length < 6
-                              ? "Entrer un mot de passe d'au moins 6 caractères"
-                              : null, // Validation du champ mot de passe
-                        ),
-                        const SizedBox(height: 20.0),
-                        TextFormField(
-                            controller:
-                                confirmPasswordController, // Utilise le contrôleur passwordController pour gérer le champ
-                            obscureText: false,
-                            decoration: const InputDecoration(
                               fillColor: Colors.white,
                               filled: true,
                               contentPadding: EdgeInsets.all(10),
@@ -206,10 +183,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   borderSide: BorderSide(color: Colors.grey)),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Color.fromARGB(255, 235, 87, 87),
+                                color:orangeColor
                               )),
-                              labelText: 'Confirmer votre mot de passe',
-                            ),
+                              labelText:
+                                  'Mot de passe', // Texte à afficher dans le champ
+                              labelStyle: TextStyle(color: Colors.black)),
+                          validator: (value) => value!.length < 6
+                              ? "Entrer un mot de passe d'au moins 6 caractères"
+                              : null, // Validation du champ mot de passe
+                        ),
+                        const SizedBox(height: 20.0),
+                        TextFormField(
+                            controller:
+                                confirmPasswordController, // Utilise le contrôleur passwordController pour gérer le champ
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                contentPadding: EdgeInsets.all(10),
+                                errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red)),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color:orangeColor,
+                                )),
+                                labelText: 'Confirmer votre mot de passe',
+                                labelStyle: TextStyle(color: Colors.black)),
                             validator: (value) {
                               if (value != passwordController.text) {
                                 return 'Les mots de passe ne correspondent pas';
@@ -221,20 +224,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // Vérifie si le formulaire est valide avant de déclencher l'authentification
-                              register(); // Appelle la méthode signIn pour tenter de se connecter
+                              register(); // Appelle la méthode register pour tenter de s'inscrire
                             }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(255, 55, 121, 66),
+                               greenColor,
                             foregroundColor: Colors.white,
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  15), // Changez 8 à la taille souhaitée
+                            ),
                           ),
                           child: const Text(
                               "Je m'inscris"), // Texte du bouton de connexion
                         ),
-                        const SizedBox(height: 12.0),
+                        const SizedBox(height: 10.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "J'ai déjà un compte,",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignInScreen()),
+                                );
+                              },
+                              child: const Text(
+                                " je me connecte !",
+                                style: TextStyle(
+                                  color: orangeColor,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
                         Text(
-                          error, // Affiche le message d'erreur en cas d'échec de connexion
+                          error, // Affiche le message d'erreur en cas d'échec de l'inscription
                           style: const TextStyle(
                               color: Colors.red, fontSize: 14.0),
                         ),

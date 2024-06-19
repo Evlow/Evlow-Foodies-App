@@ -1,4 +1,5 @@
 import 'package:evlow_foodies/authentification/register_screen.dart';
+import 'package:evlow_foodies/colors/colors.dart';
 import 'package:evlow_foodies/firebase_options.dart';
 import 'package:evlow_foodies/page/home_page.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return   MaterialApp(
       title: 'Evlow',
       debugShowCheckedModeBanner: false,
-      home: HomeContent(),
-      // theme:ThemeData(
-      //           fontFamily: 'AdventPro-Light',
-      // ),
+      home: const HomeContent(),
+      theme:ThemeData(
+                fontFamily: 'AdventPro'
+      )
     );
   }
 }
@@ -145,10 +146,10 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 235, 87, 87),
+        selectedItemColor: orangeColor,
         onTap: _onItemTapped,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
       ),
     );
   }

@@ -1,18 +1,18 @@
 import 'package:evlow_foodies/Authentification/auth_service.dart';
+import 'package:evlow_foodies/authentification/register_screen.dart';
+import 'package:evlow_foodies/colors/colors.dart';
 import 'package:evlow_foodies/main.dart';
 import 'package:flutter/material.dart';
 import 'package:evlow_foodies/shared/loading.dart';
 
-class SingInScreen extends StatefulWidget {
-  const SingInScreen({Key? key})
-      : super(key: key); // Constructeur de la classe RegisterScreen
-
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
   @override
-  State<SingInScreen> createState() =>
-      _SingInScreenState(); // Crée l'état de RegisterScreen
+  State<SignInScreen> createState() =>
+      _SignInScreenState(); 
 }
 
-class _SingInScreenState extends State<SingInScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   final AuthService _auth =
       AuthService(); // Instance de la classe AuthService pour gérer l'authentification
   final _formKey = GlobalKey<
@@ -33,46 +33,44 @@ class _SingInScreenState extends State<SingInScreen> {
     super.dispose(); // Appelle la méthode dispose de la classe mère
   }
 
-
   void signIn() async {
-  setState(() {
-    loading = true;
-  });
+    setState(() {
+      loading = true;
+    });
 
-  try {
-    String email = emailController.text.trim();
-    String password = passwordController.text.trim();
+    try {
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
 
-    // Appel à la méthode signInWithEmailAndPassword de l'instance _auth pour tenter la connexion
-    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+      // Appel à la méthode signInWithEmailAndPassword de l'instance _auth pour tenter la connexion
+      dynamic result = await _auth.signInWithEmailAndPassword(email, password);
 
-    if (result != null) {
-      // Navigation vers l'écran suivant (HomeScreen dans cet exemple)
-      Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => const HomeContent()),
-      );
-    } else {
-      // En cas d'échec de la connexion
+      if (result != null) {
+        // Navigation vers l'écran suivant (HomeScreen dans cet exemple)
+        Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const HomeContent()),
+        );
+      } else {
+        // En cas d'échec de la connexion
+        setState(() {
+          loading = false;
+          error = 'Erreur de connexion. Vérifiez vos identifiants.';
+        });
+      }
+    } catch (e) {
       setState(() {
         loading = false;
-        error = 'Erreur de connexion. Vérifiez vos identifiants.';
+        error = 'Une erreur est survenue lors de la connexion.';
       });
     }
-  } catch (e) {
-    setState(() {
-      loading = false;
-      error = 'Une erreur est survenue lors de la connexion.';
-    });
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
     return loading
-        ? const Loading() 
+        ? const Loading()
         : Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
@@ -80,16 +78,15 @@ class _SingInScreenState extends State<SingInScreen> {
               title: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(
-                  'images/logo.png', 
+                  'images/logo.png',
                   height: 40.0,
                   fit: BoxFit.contain,
                 ),
               ),
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back), 
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  Navigator.pop(
-                      context);
+                  Navigator.pop(context);
                 },
               ),
               bottom: PreferredSize(
@@ -109,7 +106,7 @@ class _SingInScreenState extends State<SingInScreen> {
                 ),
               ),
             ),
-            body: Container(
+            body: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,7 +122,7 @@ class _SingInScreenState extends State<SingInScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 235, 87, 87),
+                        color: orangeColor,
                       )),
                   const SizedBox(height: 20.0),
                   Form(
@@ -137,18 +134,18 @@ class _SingInScreenState extends State<SingInScreen> {
                           controller:
                               emailController, // Utilise le contrôleur emailController pour gérer le champ
                           decoration: const InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(10),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color.fromARGB(255, 235, 87, 87),
-                            )),
-                            labelText:
-                                'Email', // Texte à afficher dans le champ
-                          ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding: EdgeInsets.all(10),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: orangeColor,
+                              )),
+                              labelText:
+                                  'Email', // Texte à afficher dans le champ
+                              labelStyle: TextStyle(color: Colors.black)),
                           validator: (value) => value!.isEmpty
                               ? "Entrer un email"
                               : null, // Validation du champ email
@@ -160,22 +157,22 @@ class _SingInScreenState extends State<SingInScreen> {
                           obscureText:
                               true, // Masque le texte saisi pour le champ mot de passe
                           decoration: const InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(10),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color.fromARGB(255, 235, 87, 87),
-                            )),
-                            labelText:
-                                'Mot de passe', // Texte à afficher dans le champ
-                          ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding: EdgeInsets.all(10),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.red)),
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.red)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: orangeColor,
+                              )),
+                              labelText:
+                                  'Mot de passe', // Texte à afficher dans le champ
+                              labelStyle: TextStyle(color: Colors.black)),
                           validator: (value) => value!.length < 6
                               ? "Entrer un mot de passe d'au moins 6 caractères"
                               : null, // Validation du champ mot de passe
@@ -190,13 +187,49 @@ class _SingInScreenState extends State<SingInScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(255, 55, 121, 66),
+                               greenColor,
                             foregroundColor: Colors.white,
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
                           child: const Text(
-                              'Je me connecte'), // Texte du bouton de connexion
+                            'Je me connecte',
+                          ),
                         ),
                         const SizedBox(height: 12.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Je n'ai pas de compte,",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterScreen()),
+                                );
+                              },
+                              child: const Text(
+                                "  je m'inscris !",
+                                style: TextStyle(
+                                  color: orangeColor,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
                         Text(
                           error, // Affiche le message d'erreur en cas d'échec de connexion
                           style: const TextStyle(

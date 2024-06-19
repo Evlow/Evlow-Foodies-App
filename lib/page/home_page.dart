@@ -5,7 +5,6 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
-  
 }
 
 class _HomePageState extends State<HomePage> {
@@ -30,14 +29,14 @@ class _HomePageState extends State<HomePage> {
               "Avec Evlow Foodies, vous trouverez des recettes, pour tous les goûts et faciles à réaliser !",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
               )),
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
           child: Text("Découvrez les dernières idées de recettes :",
               textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         ),
       ],
     );
