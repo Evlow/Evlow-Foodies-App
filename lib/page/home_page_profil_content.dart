@@ -54,7 +54,7 @@ class _HomePageProfilContentState extends State<HomePageProfilContent> {
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
-                              side : BorderSide(color: greenColor)
+                              side : const BorderSide(color: greenColor)
                             
                             ),
                           ),

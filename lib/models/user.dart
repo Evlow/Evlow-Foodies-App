@@ -1,5 +1,11 @@
-class AppUser {
-   final String uid;
+class UserModel {
+  final String uid;
+  final String displayName;
+  final String email;
 
-   AppUser ({required this.uid});
+  UserModel({
+    required this.uid,
+    required this.displayName,
+    required this.email,
+  });
 }

@@ -1,7 +1,6 @@
 import 'package:evlow_foodies/Authentification/auth_service.dart';
 import 'package:evlow_foodies/colors/colors.dart';
 import 'package:evlow_foodies/page/home_page_bo.dart';
-import 'package:evlow_foodies/page/home_page_profil_content.dart';
 import 'package:flutter/material.dart';
 import 'package:evlow_foodies/shared/loading.dart';
 
@@ -19,14 +18,14 @@ class _SignInScreenState extends State<SignInScreen> {
   String error = ''; // Variable pour stocker les messages d'erreur
   bool loading = false; // Indicateur pour afficher l'état de chargement
 
-  final emailController =
+  final displayNameController =
       TextEditingController(); // Contrôleur pour gérer la valeur du champ email
   final passwordController =
       TextEditingController(); // Contrôleur pour gérer la valeur du champ mot de passe
 
   @override
   void dispose() {
-    emailController.dispose(); // Libère les ressources du contrôleur d'email
+    displayNameController.dispose(); // Libère les ressources du contrôleur d'email
     passwordController
         .dispose(); // Libère les ressources du contrôleur de mot de passe
     super.dispose(); // Appelle la méthode dispose de la classe mère
@@ -38,11 +37,11 @@ class _SignInScreenState extends State<SignInScreen> {
     });
 
     try {
-      String email = emailController.text.trim();
+      String displayName = displayNameController.text.trim();
       String password = passwordController.text.trim();
 
       // Appel à la méthode signInWithEmailAndPassword de l'instance _auth pour tenter la connexion
-      dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+      dynamic result = await _auth.signInWithEmailAndPassword(displayName, password);
 
       if (result != null) {
         // Navigation vers l'écran suivant (HomeScreen dans cet exemple)
@@ -131,7 +130,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         TextFormField(
                           controller:
-                              emailController, // Utilise le contrôleur emailController pour gérer le champ
+                              displayNameController
+                            , // Utilise le contrôleur emailController pour gérer le champ
                           decoration: const InputDecoration(
                               fillColor: Colors.white,
                               filled: true,
@@ -143,10 +143,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: orangeColor,
                               )),
                               labelText:
-                                  'Email', // Texte à afficher dans le champ
+                                  'Pseudo', // Texte à afficher dans le champ
                               labelStyle: TextStyle(color: Colors.black)),
                           validator: (value) => value!.isEmpty
-                              ? "Entrer un email"
+                              ? "Entrer un pseudo"
                               : null, // Validation du champ email
                         ),
                         const SizedBox(height: 20.0),

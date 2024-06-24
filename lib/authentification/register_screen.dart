@@ -19,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       FormState>(); // Clé globale pour identifier le formulaire et effectuer des validations
   String error = ''; // Variable pour stocker les messages d'erreur
   bool loading = false; // Indicateur pour afficher l'état de chargement
-
+final displayNameController = TextEditingController();
   final emailController =
       TextEditingController(); // Contrôleur pour gérer la valeur du champ email
   final passwordController = TextEditingController();
@@ -28,6 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
+    displayNameController.dispose();
     emailController.dispose(); // Libère les ressources du contrôleur d'email
     passwordController
         .dispose(); // Libère les ressources du contrôleur de mot de passe
@@ -41,6 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     try {
+      String displayName = displayNameController.text.trim();
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
       // Validation de la confirmation de mot de passe
@@ -56,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       // Appel à la méthode registerWithEmailAndPassword de l'instance _auth pour tenter l'inscription
       dynamic result =
-          await _auth.registerWithEmailAndPassword(email, password);
+          await _auth.registerWithEmailAndPassword(email, password, displayName);
 
       if (result != null) {
         // Navigation vers l'écran suivant (SignInScreen dans cet exemple)
@@ -145,6 +147,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         _formKey, // Lie ce formulaire à la clé globale _formKey
                     child: Column(
                       children: [
+                             TextFormField(
+                          controller:
+                              displayNameController, // Utilise le contrôleur emailController pour gérer le champ
+                          decoration: const InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding: EdgeInsets.all(10),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: orangeColor
+                              )),
+                              labelText:
+                                  'Pseudo', // Texte à afficher dans le champ
+                              labelStyle: TextStyle(color: Colors.black)),
+                          validator: (value) => value!.isEmpty
+                              ? "Entrer un pseudo"
+                              : null, // Validation du champ email
+                        ),
+                        const SizedBox(height: 20.0),
                         TextFormField(
                           controller:
                               emailController, // Utilise le contrôleur emailController pour gérer le champ
